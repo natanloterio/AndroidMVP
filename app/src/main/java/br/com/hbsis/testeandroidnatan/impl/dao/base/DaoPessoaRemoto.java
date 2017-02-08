@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.hbsis.testeandroidnatan.base.IDao;
-import br.com.hbsis.testeandroidnatan.network.Connector;
+import br.com.hbsis.testeandroidnatan.util.Connector;
 
 /**
  * Created by natan on 07/02/17.

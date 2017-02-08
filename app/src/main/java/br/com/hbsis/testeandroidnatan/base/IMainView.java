@@ -16,6 +16,8 @@ public interface IMainView {
 
     void mostrarProgressDialog();
 
+    void mostrarProgressDialog(String message);
+
     void esconderProgressDialog();
 
 }

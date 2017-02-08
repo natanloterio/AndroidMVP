@@ -1,9 +1,8 @@
-package br.com.hbsis.testeandroidnatan.network;
+package br.com.hbsis.testeandroidnatan.util;
 
 import android.content.Context;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.util.Log;
 
 public class MediaScannerWrapper implements MediaScannerConnection.MediaScannerConnectionClient {
     private MediaScannerConnection mConnection;

@@ -1,4 +1,4 @@
-package br.com.hbsis.testeandroidnatan.base.util;
+package br.com.hbsis.testeandroidnatan.util;
 
 import android.app.AlertDialog;
 import android.content.Context;

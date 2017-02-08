@@ -1,4 +1,4 @@
-package br.com.hbsis.testeandroidnatan.network;
+package br.com.hbsis.testeandroidnatan.util;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

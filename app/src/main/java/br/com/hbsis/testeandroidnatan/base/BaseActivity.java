@@ -3,16 +3,11 @@ package br.com.hbsis.testeandroidnatan.base;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 
-import br.com.hbsis.testeandroidnatan.R;
-import br.com.hbsis.testeandroidnatan.base.util.DialogUtils;
+import br.com.hbsis.testeandroidnatan.util.DialogUtils;
 
 /**
  * Created by natan on 06/02/17.
@@ -80,10 +75,16 @@ public abstract class BaseActivity<PresenterClass> extends AppCompatActivity imp
 
     @Override
     public void mostrarProgressDialog() {
+        mostrarAlerta("Carregando...");
+    }
+
+
+    @Override
+    public void mostrarProgressDialog(String message) {
         esconderProgressDialog();
         progressDialog = new ProgressDialog(BaseActivity.this);
         progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Carregando...");
+        progressDialog.setMessage(message);
         progressDialog.show();
     }
 
