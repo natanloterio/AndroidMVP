@@ -165,4 +165,5 @@ public abstract class BasePresenter {
         deveMostrarProgressDialogAoCarregarDados = b;
     }
 
+
 }

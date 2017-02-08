@@ -1,6 +1,10 @@
 package br.com.hbsis.testeandroidnatan.impl.view.activity;
 
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import br.com.hbsis.testeandroidnatan.R;
@@ -48,7 +52,25 @@ public class MainActivity extends BaseActivity<MainPresenter> {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_realizar_backup:
+                getPresenter().onClickFazerBackup();
+                break;
+            case R.id.action_atualizar_app:
+                getPresenter().onClickAtualizarApp();
+                break;
+            default:break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }

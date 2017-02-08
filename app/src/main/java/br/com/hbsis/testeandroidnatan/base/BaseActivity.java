@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import br.com.hbsis.testeandroidnatan.base.util.DialogUtils;
  * Created by natan on 06/02/17.
  */
 
-public abstract class BaseActivity<PresenterClass> extends FragmentActivity implements IMainView, IViewNotifier{
+public abstract class BaseActivity<PresenterClass> extends AppCompatActivity implements IMainView, IViewNotifier{
 
     // Presenter da activity
     private PresenterClass presenter;
