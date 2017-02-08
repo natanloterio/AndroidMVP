@@ -6,37 +6,72 @@ import android.os.AsyncTask;
  * Created by natan on 06/02/17.
  */
 
-public class CarregarDados extends AsyncTask<Void,Void,Void> {
+public class CarregarDados extends AsyncTask<Object, Object, Boolean> {
 
-    private final AntesCarregarDados listenerAntesCarregarDados;
-    private final DepoisCarregarDados listenerDepoisCarregarDados;
+    private final IAntesCarregarDados listenerAntesCarregarDados;
+    private final IDepoisCarregarDados listenerDepoisCarregarDados;
+    private final ICarregarDados listenerCarregarDados;
+    private final IErrorListener listenerOnError;
 
-    public CarregarDados(AntesCarregarDados listenerAntesCarregarDados, DepoisCarregarDados listenerDepoisCarregarDados) {
+    public CarregarDados(IAntesCarregarDados listenerAntesCarregarDados, ICarregarDados listenerCarregarDados, IDepoisCarregarDados listenerDepoisCarregarDados, IErrorListener listenerOnError) throws Exception {
+        if(listenerAntesCarregarDados == null ){
+            throw new Exception("Você precisa informar um listener para antes de carregar os dados");
+        }
+
+        if(listenerCarregarDados == null){
+            throw new Exception("Você precisa informar um listener para carregar os dados");
+        }
+
+        if(listenerDepoisCarregarDados == null) {
+            throw new Exception("Você precisa informar um listener para depois de carregar os dados");
+        }
         this.listenerAntesCarregarDados = listenerAntesCarregarDados;
+        this.listenerCarregarDados = listenerCarregarDados;
         this.listenerDepoisCarregarDados = listenerDepoisCarregarDados;
+        this.listenerOnError = listenerOnError;
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-
+        listenerAntesCarregarDados.antesCarregarDadosAsyncTask();
     }
 
     @Override
-    protected Void doInBackground(Void... params) {
-        return null;
+    protected Boolean doInBackground(Object... params) {
+        try {
+            listenerCarregarDados.carregarDadosAsyncTask();
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
-    protected void onPostExecute(Void aVoid) {
-        super.onPostExecute(aVoid);
+    protected void onPostExecute(Boolean success) {
+        super.onPostExecute(success);
+        if(success) {
+            listenerDepoisCarregarDados.depoisCarregarDadosAsyncTask();
+        }else{
+            listenerOnError.onError();
+        }
     }
 
-    public interface AntesCarregarDados{
-        void antesCarregarDados();
+    public interface IAntesCarregarDados {
+        void antesCarregarDadosAsyncTask();
     }
 
-    public interface DepoisCarregarDados{
-        void depoisCarregarDados();
+    public interface ICarregarDados{
+        void carregarDadosAsyncTask() throws Exception;
+
+    }
+
+    public interface IDepoisCarregarDados {
+        void depoisCarregarDadosAsyncTask();
+    }
+
+    public interface IErrorListener{
+        void onError();
     }
 }
