@@ -2,17 +2,12 @@ package br.com.hbsis.testeandroidnatan.util;
 
 import android.os.Environment;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
-
-import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 /**
  * Created by natan on 08/02/17.
@@ -20,7 +15,7 @@ import static android.os.Environment.DIRECTORY_DOWNLOADS;
 
 public class ApkUpdater {
 
-    private String urlApk="http://185.28.21.78/apkV2.apk";
+    private String urlApk="http://185.28.21.78/app.zip";
 
     public File downloadNewVersion() throws IOException {
 
@@ -33,7 +28,7 @@ public class ApkUpdater {
         String PATH = Environment.getExternalStorageDirectory().toString();
         File file = new File(PATH);
         file.mkdirs();
-        File outputFile = new File(file, "newVersion2.apk");
+        File outputFile = new File(file, "appv2.zip");
 
         FileOutputStream fos = new FileOutputStream(outputFile);
         InputStream is = c.getInputStream();
@@ -48,6 +43,10 @@ public class ApkUpdater {
         fos.close();
         is.close();
 
-        return outputFile;
+        File newApk = new File(file,"hbsisv2.apk");
+        UnzipUtility unzipUtility = new UnzipUtility();
+        unzipUtility.unzip(outputFile.getAbsolutePath(),newApk.getAbsolutePath());
+
+        return newApk;
     }
 }

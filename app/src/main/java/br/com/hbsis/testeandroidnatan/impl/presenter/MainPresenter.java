@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Environment;
+import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -73,10 +74,15 @@ public class MainPresenter extends BasePresenter{
     }
 
     private void instalarNovoApk(File novoApk) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(novoApk), "application/vnd.android.package-archive");
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        getActivityContext().startActivity(intent);
+        Log.w(this.getClass().getSimpleName(),"Instalando nova versão de:"+novoApk.getAbsolutePath());
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(Uri.fromFile(novoApk), "application/vnd.android.package-archive");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getActivityContext().startActivity(intent);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private File baixarNovoApk() throws IOException {

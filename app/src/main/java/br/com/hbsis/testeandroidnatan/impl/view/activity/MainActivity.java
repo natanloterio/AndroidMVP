@@ -1,11 +1,15 @@
 package br.com.hbsis.testeandroidnatan.impl.view.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
+
+import java.io.File;
 
 import br.com.hbsis.testeandroidnatan.R;
 import br.com.hbsis.testeandroidnatan.base.BaseActivity;
@@ -67,10 +71,18 @@ public class MainActivity extends BaseActivity<MainPresenter> {
                 break;
             case R.id.action_atualizar_app:
                 getPresenter().onClickAtualizarApp();
+                //atualizar();
                 break;
             default:break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void atualizar() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(new File("")), "application/vnd.android.package-archive");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
 }
