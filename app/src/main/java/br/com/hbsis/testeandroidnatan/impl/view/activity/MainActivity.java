@@ -47,8 +47,7 @@ public class MainActivity extends BaseActivity<MainPresenter> {
 
     @Override
     public void inicializarAdapter() {
-        PessoaAdapter adapter = new PessoaAdapter(MainActivity.this,getPresenter().getTodasPessoas());
-        listView.setAdapter(adapter);
+        listView.setAdapter(new PessoaAdapter(MainActivity.this,getPresenter().getTodasPessoas()));
     }
 
     @Override
@@ -58,8 +57,7 @@ public class MainActivity extends BaseActivity<MainPresenter> {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
 
