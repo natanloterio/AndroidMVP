@@ -65,7 +65,7 @@ public class DaoPessoaLocal implements IDao<Pessoa> {
             do {
                 String id = c.getString(0);
                 String nome = c.getString(c.getColumnIndex(COLUNA_NOME));
-                String sobrenome = c.getString(c.getColumnIndex(COLUNA_NOME));
+                String sobrenome = c.getString(c.getColumnIndex(COLUNA_SOBRENOME));
                 long longdataNascimenot = c.getLong(c.getColumnIndex(COLUNA_DATANASCIMENTO));
                 Date dataNascimento = new Date(longdataNascimenot);
                 Pessoa p = new Pessoa();
