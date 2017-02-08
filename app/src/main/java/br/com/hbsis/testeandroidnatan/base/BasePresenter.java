@@ -28,6 +28,7 @@ public abstract class BasePresenter {
     private boolean viewsLiberadasParaAtualizacao;
     private DaoFactoryPessoa daoFactory;
     private IMainView mainView;
+    private boolean deveMostrarProgressDialogAoCarregarDados;
 
     public BasePresenter(Context activityContext)  {
         this.activityContext = activityContext;
@@ -105,6 +106,10 @@ public abstract class BasePresenter {
         }
     }
 
+    public Context getActivityContext() {
+        return activityContext;
+    }
+
     private boolean podeAtualizarViews() {
         return viewsLiberadasParaAtualizacao;
     }
@@ -116,6 +121,7 @@ public abstract class BasePresenter {
     private void habilitarAtualizacaoDeViews(){
         viewsLiberadasParaAtualizacao = true;
     }
+
 
     protected DaoFactoryPessoa getDaoFactory(){
         if(daoFactory == null){
@@ -133,12 +139,18 @@ public abstract class BasePresenter {
     /**
      * Evento chamado antes de carregar os dados
      */
-    protected abstract void antesDeCarregarDados();
+    protected void antesDeCarregarDados(){
+        if(deveMostrarProgressDialogAoCarregarDados) {
+            getMainView().mostrarProgressDialog();
+        }
+    }
 
     /**
      * Evento chamado antes de carregar os dados
      */
-    protected abstract void depoisDeCarregarDados();
+    protected void depoisDeCarregarDados(){
+        getMainView().esconderProgressDialog();
+    }
 
     public IMainView getMainView() {
         return mainView;
@@ -147,4 +159,10 @@ public abstract class BasePresenter {
     public void setMainView(IMainView mainView) {
         this.mainView = mainView;
     }
+
+
+    protected void setMostrarProgressDialogAoCarregaDados(boolean b) {
+        deveMostrarProgressDialogAoCarregarDados = b;
+    }
+
 }

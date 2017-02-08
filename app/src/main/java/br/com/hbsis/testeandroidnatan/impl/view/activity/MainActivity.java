@@ -1,19 +1,18 @@
 package br.com.hbsis.testeandroidnatan.impl.view.activity;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.widget.ListView;
 
 import br.com.hbsis.testeandroidnatan.R;
 import br.com.hbsis.testeandroidnatan.base.BaseActivity;
-import br.com.hbsis.testeandroidnatan.impl.presenter.PresenterImpl;
+import br.com.hbsis.testeandroidnatan.impl.presenter.MainPresenter;
 import br.com.hbsis.testeandroidnatan.impl.view.adapter.PessoaAdapter;
 
 /**
  * Created by natan on 06/02/17.
  */
 
-public class MainActivity extends BaseActivity<PresenterImpl> {
+public class MainActivity extends BaseActivity<MainPresenter> {
 
     private ListView listView;
 
@@ -24,8 +23,8 @@ public class MainActivity extends BaseActivity<PresenterImpl> {
     }
 
     @Override
-    protected PresenterImpl getPresenterNewsInstance() {
-        return new PresenterImpl(MainActivity.this);
+    protected MainPresenter getPresenterNewsInstance() {
+        return new MainPresenter(MainActivity.this);
     }
 
     @Override

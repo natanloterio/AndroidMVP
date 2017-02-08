@@ -1,10 +1,16 @@
 package br.com.hbsis.testeandroidnatan.base;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 
+import br.com.hbsis.testeandroidnatan.R;
 import br.com.hbsis.testeandroidnatan.base.util.DialogUtils;
 
 /**
@@ -17,12 +23,17 @@ public abstract class BaseActivity<PresenterClass> extends FragmentActivity impl
     private PresenterClass presenter;
 
     private boolean deverReinicializarPresenter = true;
+    private ProgressDialog progressDialog;
+    private ViewGroup containerView;
+    private View contentView;
+    private View splash;
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         presenter = getPresenterNewsInstance();
     }
+
 
     @Override
     protected void onResume() {
@@ -66,6 +77,22 @@ public abstract class BaseActivity<PresenterClass> extends FragmentActivity impl
         } );
     }
 
+    @Override
+    public void mostrarProgressDialog() {
+        esconderProgressDialog();
+        progressDialog = new ProgressDialog(BaseActivity.this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Carregando...");
+        progressDialog.show();
+    }
+
+    @Override
+    public void esconderProgressDialog() {
+        if(progressDialog != null){
+            progressDialog.dismiss();
+        }
+    }
+
     /**
      * Retorna uma instancia do @{@link BasePresenter<PresenterClass>}
      */
@@ -85,6 +112,5 @@ public abstract class BaseActivity<PresenterClass> extends FragmentActivity impl
      * @return @{@link BasePresenter}
      */
     protected abstract PresenterClass getPresenterNewsInstance();
-
 
 }

@@ -13,4 +13,9 @@ public interface IMainView {
     void registerViews();
 
     void initializeViews();
+
+    void mostrarProgressDialog();
+
+    void esconderProgressDialog();
+
 }
